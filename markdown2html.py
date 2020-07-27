@@ -11,6 +11,24 @@ if __name__ == "__main__":
         with open(argv[1], "r") as markdown_file:
             with open(argv[2], "w") as html_file:
                 for line in markdown_file:
-                    html_file.write(line)
+                    if "###### " in line:
+                        new_line = line.replace("###### ", "<h6>")
+                        new_line = new_line.replace("\n", "</h6>\n")
+                    elif "##### " in line:
+                        new_line = line.replace("##### ", "<h5>")
+                        new_line = new_line.replace("\n", "</h5>\n")
+                    elif "#### " in line:
+                        new_line = line.replace("#### ", "<h4>")
+                        new_line = new_line.replace("\n", "</h4>\n")
+                    elif "### " in line:
+                        new_line = line.replace("### ", "<h3>")
+                        new_line = new_line.replace("\n", "</h3>\n")
+                    elif "## " in line:
+                        new_line = line.replace("## ", "<h2>")
+                        new_line = new_line.replace("\n", "</h2>\n")
+                    elif "# " in line:
+                        new_line = line.replace("# ", "<h1>")
+                        new_line = new_line.replace("\n", "</h1>\n")
+                    html_file.write(new_line)
     except:
         exit("Missing {}".format(argv[1]))
